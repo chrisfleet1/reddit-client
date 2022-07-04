@@ -1,0 +1,20 @@
+.header-logo {
+    font-size: 3em;
+    color: #313C5D;
+    margin-top: 0.1em;
+}
+
+.header {
+    background-color: #ffffff;
+    height: 8rem;
+    font-size: 2em;
+}
+
+.app-name {
+    color: #313C5D;
+    font-weight: 800;
+}
+
+.app-name-color-two {
+    color: #e60808;
+}

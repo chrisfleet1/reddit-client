@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  color: #91A5CB;
+  background-color: #313C5D;
+  text-align: center;
+  font-size: 12px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+/* Think about how the articles should structure */
+
+/* Think about the Sub Reddits section - this is a navigation */
+
+/* Think about a "Search" function */
