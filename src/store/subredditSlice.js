@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSubReddits } from "../api/api";
+import { getSubreddits } from "../api/api";
 
 const initialState = {
     isLoading: false,
@@ -7,25 +7,25 @@ const initialState = {
     subReddit: []
 }
 
-const subRedditSlice = createSlice({
+const subredditSlice = createSlice({
     name: 'subRedditSlice',
     initialState: initialState,
     reducer: {
-        setSubReddit(state, action) {
+        setSubreddit(state, action) {
             // Set the initial sub reddit
             state.subReddit = action.payload
         },
-        fetchSubRedditPending(state, action) {
+        fetchSubredditPending(state, action) {
             // Handle the pending status for fetching the sub reddit from the API
             state.isLoading = true;
         },
-        fetchSubRedditSuccess(state, action) {  
+        fetchSubredditSuccess(state, action) {  
             // Handle the success status for fetching the sub reddit from the API - push the data into the subReddit array
             state.isLoading = false;
             state.error = false;
             state.subReddit.push(action.payload);
         },
-        fetchSubRedditFailed(state, action) {
+        fetchSubredditFailed(state, action) {
             // Handle the failure status for fetching the sub reddit from the API
             state.isLoading = false;
             state.error = true;
@@ -36,25 +36,25 @@ const subRedditSlice = createSlice({
 
 
 export const {
-    setSubReddit,
-    fetchSubRedditPending,
-    fetchSubRedditSuccess,
-    fetchSubRedditFailed
-} = subRedditSlice.actions;
+    setSubreddit,
+    fetchSubredditPending,
+    fetchSubredditSuccess,
+    fetchSubredditFailed
+} = subredditSlice.actions;
 
 //Define the reducer
-export default subRedditSlice.reducer;
+export default subredditSlice.reducer;
 
 //Define the middleware to fetch the subreddits. Needs to be async and take a dispatch arg. Needs to try getting subreddits and handling an error.
 export const fetchSubreddits = () => async (dispatch) => {
     try {
-    dispatch(fetchSubRedditPending())
-    const subreddits = await getSubReddits()
-    dispatch(fetchSubRedditSuccess(subreddits))
+    dispatch(fetchSubredditPending())
+    const subreddits = await getSubreddits()
+    dispatch(fetchSubredditSuccess(subreddits))
     } catch(err) {
-    dispatch(fetchSubRedditFailed())
+    dispatch(fetchSubredditFailed())
     }
 };
 
 //Define the selected subreddits state.
-export const selectedSubReddit = (state) => state.subreddits.subReddit;
+export const selectedSubreddit = (state) => state.subreddits.subReddit;

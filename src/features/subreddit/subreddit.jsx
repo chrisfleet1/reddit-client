@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSelectedSubReddit, selectSubReddit } from "../../store/redditSlice";
-import { getSubReddits } from '../../api/api';
+import { selectSelectedSubreddit, selectSubreddit } from "../../store/redditSlice";
+import { getSubreddits } from '../../api/api';
 import Card from '../card/card';
 import './subreddit.css';
 
@@ -9,12 +9,12 @@ import './subreddit.css';
 // Declare a SubReddits function
 const Subreddits = () => {
     const dispatch = useDispatch();
-    const subreddits = useSelector(selectSubReddit);
-    const selectedSubReddit = useSelector(selectSelectedSubReddit);
+    const subreddits = useSelector(selectSubreddit);
+    const selectedSubreddit = useSelector(selectSelectedSubreddit);
 
 // Fetch the subreddits and dispatch it
     useEffect(() => {
-        dispatch(getSubReddits());
+        dispatch(getSubreddits());
     }, [dispatch]);
 
 // Return the subreddits in a list
@@ -26,7 +26,7 @@ const Subreddits = () => {
                 <li
                 key={subreddit.id}
                 className={`${
-                    selectedSubReddit === subreddit.url && `selected-subreddit`
+                    selectedSubreddit === subreddit.url && `selected-subreddit`
                 }`}
                 >
                 {/* Think about improvements - images, buttons */}

@@ -1,12 +1,12 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import redditReducer from './redditSlice';
 import subRedditReducer from './subredditSlice';
 
-const store = configureStore(combineReducers({
+const store = configureStore({
     reducer: {
         reddit: redditReducer,
         subReddit: subRedditReducer
-    }
-}));
+        }
+    });
 
 export default store;

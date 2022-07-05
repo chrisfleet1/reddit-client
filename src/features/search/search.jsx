@@ -1,27 +1,30 @@
 import React from "react";
-// import { BsSearch } from "react-icons/bs";
 import './search.css';
-import { useState } from "react";
-import { getSubRedditPosts } from "../../api/api";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchTerm } from '../../store/redditSlice.js';
 
 export const Search =() => {
     const [searchValue, setSearchValue] = useState('');
+    const searchTerm = useSelector((state) => state.reddit.searchTerm);
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        e.preventDefault();
         setSearchValue(e.target.value);
-    };
+    }; 
 
-    console.log(setSearchValue);
+    useEffect(() => {
+        setSearchValue(searchTerm);
+    }, [searchTerm]);
 
     //onSubmit function to search for the subreddits from the Reddit API
-    const onSubmit = (setSearchValue) => {
-        searchValue.preventDefault();
-        getSubRedditPosts(setSearchValue);
-    }
+    const onSubmit = (e) => {
+        e.preventDefault(); 
+        dispatch(setSearchTerm(searchValue));
+    };
 
     return (
-        <form className="search" onSubmit={onSubmit}>
+        <form className="search" onSubmit={onSubmit} >
                 <input className="search-bar"
                     type="text"
                     placeholder="Search"
