@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { Header } from './features/header/header.jsx';
 import { Search } from './features/search/search.jsx';
@@ -9,9 +10,9 @@ function App() {
     <>
     <Header />
     <Search />
-    {/* <main>
+    <main>
       <Home />
-    </main> */}
+    </main>
     {/* <aside>
       <Subreddits />
   </aside> */}

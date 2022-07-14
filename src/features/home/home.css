@@ -1,0 +1,54 @@
+button {
+    height: 2.5em;
+    width: 10em;
+    border-radius: 5em;
+    border: none;
+    font-family: Poppins, sans-serif;
+    font-size: 1.5em;
+    font-weight: 500;
+    box-shadow: 5px #fff;
+}
+
+button:hover{
+    border: 2px solid #91A5CB;
+    background-color: #91A5CB;
+    cursor: pointer;
+    color: white
+}
+
+h3 {
+    font-family: var(--font);
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: var(--color-alert);
+}
+
+.thumbs-down {
+    font-size: 4em;
+    color: var(--color-alert);
+    margin-bottom: 2rem;
+}
+
+.loading {
+    margin-top: 10%;
+    font-size: 10rem;
+}
+
+.loading-text {
+    font-size: 2rem;
+    margin-top: 0px;
+    color: #fff
+}
+
+.loading-text {
+    color: #fff;
+    text-transform: uppercase;
+    animation: flip 2s infinite;
+    animation-delay: calc(.2s * var(--i));
+  }
+  
+  @keyframes flip {
+    0%,80% {
+      transform: rotateY(360deg) 
+    }
+  }

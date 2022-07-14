@@ -2,21 +2,21 @@ import React, {useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchComments, selectFilteredPosts, fetchPosts, setSearchTerm } from "../../store/redditSlice";
 import { Audio } from 'react-loading-icons';
-import { Post } from '../post/post.jsx';
+import Post from '../post/post.jsx';
 import './home.css';
-
+import {BsFillHandThumbsDownFill} from 'react-icons/bs';
 
 const Home = () => {
     const reddit = useSelector((state) => state.reddit);
-    const {isLoading, error, searchTerm, selectedSubReddit} = reddit;
+    const {isLoading, error, searchTerm, selectedSubreddit} = reddit;
     const posts = useSelector(selectFilteredPosts);
     const dispatch = useDispatch();
 
     //DISPATCH THE FETCH TO GET SELECTED SUB REDDITS
     // This will dispath the fetchPosts request and use the selected subreddit
     useEffect(() => {
-        dispatch(fetchPosts(selectedSubReddit));
-    }, [selectedSubReddit]);
+        dispatch(fetchPosts(selectedSubreddit));
+    }, [selectedSubreddit]);
     
 
     //TOGGLE COMMENTS
@@ -32,14 +32,18 @@ const Home = () => {
     //HANDLE THE ISLOADING AND ERROR 
     // If the comments are pending, show a message to say "posts are loading", if an error then show an error message
     if(isLoading) {
-        <div>
-        <Audio />
-        <h4>Loading</h4>
-        </div>
+        return (
+            <div>
+            <Audio className="loading" />
+            <h4 className="loading-text">Loading</h4>
+            </div>
+        )  ;
     }
 
     if(error){
-        <h3>There is an error with your search!</h3>
+        return(
+            <h3>There is an error with your search!</h3>
+        );
     }
 
     //CHECK IF THERE ARE ANY POSTS, IF THERE ARE THEN THE POSTS NEED TO BE MAPPED, IF NOT THEN DISPLAY A MESSAGE
@@ -47,10 +51,12 @@ const Home = () => {
     if(posts.length === 0) {
         return (
         <div>
-            <h3>There are no posts to display for {searchTerm}!</h3>
+            <h3 className="post-error">There are no posts to display for {searchTerm}!</h3>
+            <BsFillHandThumbsDownFill className="thumbs-down"/>
+            <br></br>            
             <button type="button" onClick={() => dispatch(setSearchTerm(''))}>Go Home</button> 
         </div>
-        )
+        );
     }
 
     return (
@@ -59,12 +65,11 @@ const Home = () => {
             <Post
                 key={post.id}
                 post={post}
-                comments={toggleComments(index)}
+                toggleComments={toggleComments(index)}
             />
         ))}
         </>
-    )
-
+    );
 };
 
 export default Home;   

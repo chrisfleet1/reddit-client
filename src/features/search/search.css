@@ -5,6 +5,8 @@
     border-radius: 1em;
     height: 2em;
     width: 25%;
+    border-style: double;
+    font-family: Poppins, sans-serif;
 }
 
 .search button {

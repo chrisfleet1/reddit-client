@@ -1,5 +1,5 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { getComments, getSubredditPosts } from "../api/api";
+    import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { getComments, getSubredditPosts } from "../api/reddit";
 
 // Declare the initial state, taking into account different states - is loading, error, search term, pulling through a selected sub reddit
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
     error: false,
     isLoading: false,
     searchTerm: '',
-    selectedSubreddit: 'r/sportmemes/'
+    selectedSubreddit: '/r/sportmemes/',
 };
 
 // Create a slice with reducers that handles the different states (pending, success and failed) for the posts and the comments
@@ -27,7 +27,8 @@ const redditSlice = createSlice({
         },
         fetchPostSuccessful(state, action) {
             // Fetch the post from the API - this handles the successful status
-            state.isLoading = false;
+            state.isLoading = true;
+            state.error = false;
             state.posts = action.payload;
         },
         fetchPostFailed(state) {
@@ -69,7 +70,7 @@ const redditSlice = createSlice({
             state.posts[action.payload].loadingComments = false;
             state.posts[action.payload].error = true;
         }
-    }
+    },
 });
 
 // Create the action creators using the reducers created above
@@ -94,30 +95,28 @@ export default redditSlice.reducer;
 // Thunk to fetch the posts, taking one argument. Handles error. Needs to be asyncronous.
 // Create a Thunk to fetch the posts, taking one argument. This needs to be async. Needs to try fetching the posts. Needs to declare a function for the post comments.
 // Dispatch the successful action, if error then dispatch failed action.
-export const fetchPosts = (subreddit) => async(dispatch) => {
+export const fetchPosts = (subreddit) => async (dispatch) => {
     try {
         //1. dispatch the process to start fetching the posts
-        dispatch(fetchPostPending())
+        dispatch(fetchPostPending());
         //2. declare a variable that handles the process to get the data from the API - needs to be async await
         // declared a variable to get the subreddit posts (using the API method) and passed in subreddit
-        const posts = await getSubredditPosts(subreddit)
+        const posts = await getSubredditPosts(subreddit);
         //3. declare an object that takes the previous post state, and shows comments
         // Object created to obtain the metadata (comments) for the posts. We are adding showingComments and comments as additional fields to handle showing them when the user wants to. 
         // We need to do this because we need to call another API endpoint to get the comments for each post.
-        const postsWithData = posts.map((post) => {
-            return {
+        const postsWithData = posts.map((post) => ({
             ...post,
             showingComments: false,
             comments: [],
             loadingComments: false,
             errorComments: false
-            }
-        })
+        }));
         //4. dispatch the successful get posts with the comments data
-        dispatch(fetchPostSuccessful(postsWithData))
+        dispatch(fetchPostSuccessful(postsWithData));
     } catch(err) {
         // 5. dispatch the failed comments reducer
-        dispatch(fetchPostFailed())
+        dispatch(fetchPostFailed());
     }
 };
 
@@ -126,16 +125,16 @@ export const fetchPosts = (subreddit) => async(dispatch) => {
 export const fetchComments = (index, permalink) => async(dispatch) => {
     try {
         //1. dispatch the process to start fetching the comments - this needs to take one argument (arg1)
-        dispatch(fetchCommentsPending(index))
+        dispatch(fetchCommentsPending(index));
 
         //2. declare a variable that handles the process to get the data from the API - needs to be async await - needs to take one argument (arg2)
-        const comments = await getComments(permalink)
+        const comments = await getComments(permalink);
 
         //3. dispatch the successful reducer, which takes two of the arguments (arg1, variable)
-        dispatch(fetchCommentsSuccess({index, comments}))
+        dispatch(fetchCommentsSuccess({index, comments}));
         
     } catch (err) {
-        dispatch(fetchCommentsFailed(index))
+        dispatch(fetchCommentsFailed(index));
     }
 };
 

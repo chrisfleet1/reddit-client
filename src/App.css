@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: Poppins, sans-serif;
 }
 
 .App-logo {
@@ -20,4 +21,33 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/* Define the root variable styles
+
+- box-shadow
+- box-shador hover
+
+- spacing 
+
+- radius
+
+*/
+
+:root {
+  --color-background: #313C5D;
+  --color-text: #91A5CB;
+  --color-border: #e9e7e7;
+  --post-background: #ffffff;
+  --color-alert: #e60808;
+  --color-success: #6be908;
+  --color-on-hover: #ffffff52;
+  --color-link: #dcdcdc;
+  --font: Poppins, sans-serif;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font);
 }
