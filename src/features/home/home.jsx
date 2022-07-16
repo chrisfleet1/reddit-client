@@ -33,16 +33,24 @@ const Home = () => {
     // If the comments are pending, show a message to say "posts are loading", if an error then show an error message
     if(isLoading) {
         return (
-            <div>
-            <Audio className="loading" />
+            <div className="status-container">
+            <Audio className="loading-image" />
             <h4 className="loading-text">Loading</h4>
             </div>
-        )  ;
+        );
     }
 
     if(error){
         return(
-            <h3>There is an error with your search!</h3>
+            <div className="status-container">
+                <h3>There is an error with your search!</h3>
+                <button
+                    type='button'
+                    onClick={() => dispatch(fetchPosts(selectedSubreddit))}
+                >
+                    Try again
+                </button>
+            </div>
         );
     }
 
@@ -50,7 +58,7 @@ const Home = () => {
     // If there are no posts, show a message, and if there are posts then map through the array to pull through each post individually
     if(posts.length === 0) {
         return (
-        <div>
+        <div className="status-container">
             <h3 className="post-error">There are no posts to display for {searchTerm}!</h3>
             <BsFillHandThumbsDownFill className="thumbs-down"/>
             <br></br>            

@@ -1,0 +1,21 @@
+.social-media {
+    font-size: 3em;
+}
+
+.social-media-icons {
+    padding-left: 1em;
+    padding-right: 1em;
+    color: var(--color-header-text);
+}
+
+.social-media-icons:hover {
+    padding-left: 1em;
+    padding-right: 1em;
+    color: #4FCDBC;
+}
+
+.creator {
+    font-size: 1.5em;
+    color: #fff;
+    color: var(--color-header-text);
+}

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react";   
 import { useDispatch, useSelector } from "react-redux";
-import { selectSelectedSubreddit, selectSubreddit } from "../../store/redditSlice";
-import { fetchSubreddits, selectedSubreddits } from '../../store/subredditSlice.js';
+import { selectSelectedSubreddit, setSelectedSubreddit } from "../../store/redditSlice";
+import { fetchSubreddits, selectedSubreddits } from '../../store/subredditSlice';
 import Card from '../card/card.jsx';
 import './subreddit.css';
+import { Audio } from "react-loading-icons";
 
 // Declare a SubReddits function
 const Subreddits = () => {
@@ -15,6 +16,23 @@ const Subreddits = () => {
     useEffect(() => {
         dispatch(fetchSubreddits());
     }, [dispatch]);
+
+    if(subreddits.isLoading) {
+        return (
+            <div className="status-container">
+            <Audio className="loading-image" />
+            <h4 className="loading-text">Loading</h4>
+            </div>
+        );
+    }
+
+    if(subreddits.error){
+        return(
+            <div className="status-container">
+                <h3>There is an error with your search!</h3>
+            </div>
+        );
+    }
 
 // Return the subreddits in a list
     return (
@@ -30,7 +48,7 @@ const Subreddits = () => {
                 >
                     <button
                     type="button"
-                    onClick={() => dispatch(selectSubreddit(subreddit.url))}
+                    onClick={() => dispatch(setSelectedSubreddit(subreddit.url))}
                     >
                     <img
                         src={

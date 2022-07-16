@@ -2,7 +2,7 @@ import React from "react";
 import {FaReddit} from "react-icons/fa";
 import './header.css';
 
-export const Header = () => {
+const Header = () => {
     return (
         <div className="header">
             <FaReddit className="header-logo"/>
@@ -12,3 +12,5 @@ export const Header = () => {
         </div>
     )
 };
+
+export default Header;

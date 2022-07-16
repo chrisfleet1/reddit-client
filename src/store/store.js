@@ -5,7 +5,7 @@ import subredditReducer from './subredditSlice';
 const store = configureStore({
     reducer: {
         reddit: redditReducer,
-        subreddit: subredditReducer
+        subreddits: subredditReducer
         }
     });
 

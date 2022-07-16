@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './search.css';
-import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchTerm } from '../../store/redditSlice.js';
 
-export const Search =() => {
+const Search =() => {
     const [searchValue, setSearchValue] = useState('');
     const searchTerm = useSelector((state) => state.reddit.searchTerm);
     const dispatch = useDispatch();
@@ -33,5 +32,7 @@ export const Search =() => {
                     aria-label="Search Posts"
                 />
         </form>
-    )
+    );
 };
+
+export default Search;

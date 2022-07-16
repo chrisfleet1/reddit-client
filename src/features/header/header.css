@@ -8,6 +8,7 @@
     background-color: #ffffff;
     height: 8rem;
     font-size: 2em;
+    grid-column: 1/4;
 }
 
 .app-name {

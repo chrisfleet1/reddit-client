@@ -2,27 +2,26 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getSubreddits } from "../api/reddit";
 
 const initialState = {
-    isLoading: false,
-    error: false,
-    subreddits: []
-}
+    subreddits: [],
+    error: true,
+    isLoading: false        
+};
 
 const subredditSlice = createSlice({
     name: 'subreddits',
-    initialState: initialState,
-    reducer: {
-        fetchSubredditPending(state) {
+    initialState,
+    reducers: {
+        fetchSubredditsPending(state) {
             // Handle the pending status for fetching the sub reddit from the API
             state.isLoading = true;
             state.error = false;
         },
-        fetchSubredditSuccess(state, action) {  
+        fetchSubredditsSuccess(state, action) {  
             // Handle the success status for fetching the sub reddit from the API - push the data into the subReddit array
             state.isLoading = false;
-            state.error = false;
             state.subreddits = action.payload;
         },
-        fetchSubredditFailed(state) {
+        fetchSubredditsFailed(state) {
             // Handle the failure status for fetching the sub reddit from the API
             state.isLoading = false;
             state.error = true;
@@ -33,9 +32,9 @@ const subredditSlice = createSlice({
 
 
 export const {
-    fetchSubredditPending,
-    fetchSubredditSuccess,
-    fetchSubredditFailed
+    fetchSubredditsPending,
+    fetchSubredditsSuccess,
+    fetchSubredditsFailed
 } = subredditSlice.actions;
 
 //Define the reducer
@@ -44,11 +43,11 @@ export default subredditSlice.reducer;
 //Define the middleware to fetch the subreddits. Needs to be async and take a dispatch arg. Needs to try getting subreddits and handling an error.
 export const fetchSubreddits = () => async (dispatch) => {
     try {
-    dispatch(fetchSubredditPending());
+    dispatch(fetchSubredditsPending());
     const subreddits = await getSubreddits();
-    dispatch(fetchSubredditSuccess(subreddits));
-    } catch(err) {
-    dispatch(fetchSubredditFailed());
+    dispatch(fetchSubredditsSuccess(subreddits));
+    } catch(error) {
+    dispatch(fetchSubredditsFailed());
     }
 };
 

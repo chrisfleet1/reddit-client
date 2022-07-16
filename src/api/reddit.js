@@ -10,7 +10,7 @@ export const getSubredditPosts = async (subreddit) => {
 
 // Fetch the subreddit posts - needs to be converted to json
 export const getSubreddits = async () => {
-    const response = await fetch(`${root}/subreddits.json`);
+    const response = await fetch(`${root}subreddits.json`);
     const json = await response.json();
     return json.data.children.map((subreddit) => subreddit.data);
 };

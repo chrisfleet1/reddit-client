@@ -13,7 +13,7 @@ const Comment = (props) => {
                 <p>{comment.body_html}</p>
             </div>
         </div>
-    )
+    );
 };
 
 export default Comment;

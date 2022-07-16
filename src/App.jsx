@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import { Header } from './features/header/header.jsx';
-import { Search } from './features/search/search.jsx';
+import Header from './features/header/header.jsx';
+import Search from './features/search/search.jsx';
 import Home from './features/home/home.jsx';
-import Subreddits from './features/subreddit/subreddit.jsx';
+import Subreddits from './features/subreddit/subreddits.jsx';
+import Footer from './features/footer/footer';
 
 function App() {
   return (
@@ -13,9 +14,12 @@ function App() {
     <main>
       <Home />
     </main>
-    {/* <aside>
-      <Subreddits />
-  </aside> */}
+    <aside>
+    <Subreddits />
+    </aside>
+    <footer>
+      <Footer />
+    </footer>
     </>
   );
 }

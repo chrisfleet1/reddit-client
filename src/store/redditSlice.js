@@ -1,4 +1,4 @@
-    import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { getComments, getSubredditPosts } from "../api/reddit";
 
 // Declare the initial state, taking into account different states - is loading, error, search term, pulling through a selected sub reddit
@@ -9,15 +9,13 @@ const initialState = {
     searchTerm: '',
     selectedSubreddit: '/r/sportmemes/',
 };
-
 // Create a slice with reducers that handles the different states (pending, success and failed) for the posts and the comments
 
 const redditSlice = createSlice({
-    name: 'redditPosts',
-    initialState: initialState,
+    name: 'reddit',
+    initialState,
     reducers: {
         setPost(state, action) {
-            // Set default post
             state.posts = action.payload;
         },
         fetchPostPending(state) {
@@ -28,7 +26,7 @@ const redditSlice = createSlice({
         fetchPostSuccessful(state, action) {
             // Fetch the post from the API - this handles the successful status
             state.isLoading = true;
-            state.error = false;
+            // TODO - Change this to false once loading status fixed
             state.posts = action.payload;
         },
         fetchPostFailed(state) {
@@ -40,7 +38,7 @@ const redditSlice = createSlice({
             // Set the default Sub Reddit
             state.searchTerm = action.payload;
         },
-        selectSubReddit(state, action) {
+        setSelectedSubreddit(state, action) {
             // Select the Sub Reddits)
             state.selectedSubreddit = action.payload;
             state.searchTerm = '';
@@ -69,7 +67,7 @@ const redditSlice = createSlice({
             // Fetch the comments from the API - this handles the failure status
             state.posts[action.payload].loadingComments = false;
             state.posts[action.payload].error = true;
-        }
+        },
     },
 });
 
@@ -81,7 +79,7 @@ export const {
     fetchPostSuccessful,
     fetchPostFailed,
     setSearchTerm,
-    selectSubreddit,
+    setSelectedSubreddit,
     showComments,
     fetchCommentsPending,
     fetchCommentsSuccess,

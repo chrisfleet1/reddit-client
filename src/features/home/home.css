@@ -29,15 +29,20 @@ h3 {
     margin-bottom: 2rem;
 }
 
-.loading {
-    margin-top: 10%;
+.status-container {
+    grid-row: 3;
+    margin-top: 20%;
+}
+
+.loading-image {
     font-size: 10rem;
+    color: #4FCDBC;
 }
 
 .loading-text {
     font-size: 2rem;
     margin-top: 0px;
-    color: #fff
+    color: #fff;
 }
 
 .loading-text {
@@ -45,6 +50,7 @@ h3 {
     text-transform: uppercase;
     animation: flip 2s infinite;
     animation-delay: calc(.2s * var(--i));
+    grid-row: 3/3;
   }
   
   @keyframes flip {

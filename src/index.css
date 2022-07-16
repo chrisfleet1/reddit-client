@@ -8,11 +8,28 @@ body {
   font-size: 12px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 0.5fr 0.2fr 4.5fr 0.45fr;
+  grid-gap: var(--spacing-2);
 }
 
+main {
+  grid-row: 3;
+  grid-column: 2/3;
+}
+
+aside {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+footer {
+  grid-row: 4;
+  grid-column: 1/4;
+  background-color: #fff;
+}
 
 
 /* Think about how the articles should structure */
